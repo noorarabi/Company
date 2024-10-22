@@ -1,0 +1,41 @@
+﻿@model Company.Models.Comment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4 class="text-center">Comment</h4>
+<hr />
+<div class="container   min-vh-50 align-items-center ">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Comment" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommentText" class="control-label"></label>
+                <input asp-for="CommentText" class="form-control" />
+                <span asp-validation-for="CommentText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="img" class="control-label"></label>
+                <input asp-for="img" type="file" name="Image" class="form-control" />
+                <span asp-validation-for="img" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="text-center">
+    <a asp-action="Index" asp-controller="Home" >Back</a>
+</div>
+

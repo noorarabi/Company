@@ -1,0 +1,44 @@
+﻿ @model IEnumerable<Train>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Training</h6>
+            <h1 class="mb-5">Popular Training</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+                @foreach(var item in Model)
+                {
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid" src="data:image;base64,@Convert.ToBase64String(item.TrainingImg)" style="width:100%" alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                               @*  <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a> *@
+                                <a asp-action="Index" asp-controller="Cv" asp-route-id="@item.TrainId"  class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h5 class="mb-0">Company: @item.CompanyName</h5>
+                            <h5 class="mb-0">Field: @item.TrainingField</h5>
+                       
+                            <h5 class="mb-4">Training Name: @item.TrainingName</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center py-2">@item.Email</small>
+                            <small class="flex-fill text-center border-end py-2">@item.TrainingDate</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>@item.TrainingTime</small>
+   
+                        </div>
+                    </div>
+
+                </div>
+                }
+
+        
+            
+        </div>
+    </div>
+</div>
+<!-- Courses End -->

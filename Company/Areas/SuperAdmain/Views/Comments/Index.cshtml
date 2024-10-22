@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Company.Models.Comment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommentText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.img)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentText)
+            </td>
+             <td>
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="data:image;base64,@Convert.ToBase64String(item.img)" style="width: 80px; height: 80px;">
+              @*   @Html.DisplayFor(modelItem => item.img) *@
+            </td> 
+            <td>
+               @*  <a asp-action="Edit" asp-route-id="@item.CommentId">Edit</a> | *@
+                <a asp-action="Details" asp-controller="Comments" asp-area="SuperAdmain"  asp-route-id="@item.CommentId">Details</a> |
+                    <a asp-action="Delete" asp-controller="Comments" asp-area="SuperAdmain" asp-route-id="@item.CommentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,62 @@
+﻿@model Train
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Train</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrainingName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>model.TrainingName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrainingField)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrainingField)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrainingTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrainingTime)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrainingDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrainingDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrainingImg)
+        </dt>
+        <dd class="col-sm-10">
+            <img class="border rounded-circle p-2 mx-auto mb-3" src="data:image;base64,@Convert.ToBase64String(Model.TrainingImg)" style="width: 80px; height: 80px;">
+           
+        </dd>
+    </dl>
+</div>
+<div>
+     <a asp-action="Edit" asp-route-id="@Model?.TrainId">Edit</a> | 
+    <a asp-action="Index" asp-controller="CompanyTrains">Back to List</a>
+</div>
+

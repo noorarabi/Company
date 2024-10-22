@@ -1,0 +1,64 @@
+﻿@model Cv
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Apply</h1>
+<div class="container   min-vh-50 align-items-center ">
+<div class="row">
+    <div class="col-md-4">
+            <form asp-action="Index" asp-controller="Cv" method="post" enctype="multipart/form-data">
+            
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Student_Name" class="control-label"></label>
+                <input asp-for="Student_Name" class="form-control" />
+                <span asp-validation-for="Student_Name" class="text-danger"></span>
+            </div>
+                <input type="hidden" asp-for="TrainId" value="@ViewBag.Id" />
+                <div class="form-group">
+                    <label asp-for="TrainingName" class="control-label"></label>
+                    <input asp-for="TrainingName" value="@ViewBag.Name" class="form-control" />
+                    <span asp-validation-for="TrainingName" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <label asp-for="University" class="control-label"></label>
+                <select asp-for="University" class="form-control" asp-items="Html.GetEnumSelectList<Cv.Uni>()"></select>
+                <span asp-validation-for="University" class=" text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Major" class="control-label"></label>
+                <input asp-for="Major" class="form-control" />
+                <span asp-validation-for="Major" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date_of_Graduation" class="control-label"></label>
+                <input asp-for="Date_of_Graduation" class="form-control" />
+                <span asp-validation-for="Date_of_Graduation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <select asp-for="City" class="form-control" asp-items="Html.GetEnumSelectList<Cv.Citys>()"></select>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+         
+
+            <div class="form-group">
+                <label asp-for="CV" class="control-label"></label>
+                <input asp-for="CV" type="file" name="Image" class="form-control" />
+                <span asp-validation-for="CV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+        <div>
+            <a asp-action="Index" asp-controller="Home">Back</a>
+        </div>
+</div>
+</div>
+@* <div>
+    <a asp-action="Index" asp-controller="Home">Back</a>
+</div> *@
+

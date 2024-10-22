@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Company.Models.Slider>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SliderTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SliderImg)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SliderTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTitle)
+            </td>
+            <td>
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="data:image;base64,@Convert.ToBase64String(item.SliderImg)" style="width: 80px; height: 80px;">
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SliderId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SliderId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SliderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

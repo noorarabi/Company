@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Cv>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All CVs</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingName)
+            </th>
+             <th>
+            @Html.DisplayNameFor(model => model.Student_Name)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.University)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CV)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student_Name)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.City)
+            </td> 
+                <td>
+                    @Html.DisplayFor(modelItem => item.University)
+                </td>
+             
+                <td>
+                    @* <a href="data:application/pdf;base64,@Convert.ToBase64String(item.CV)" target="_blank">View CV (PDF)</a>  *@
+                    <a href="@Url.Action("ShowPdf","CompanyCv",new{id=item.CvId})" target="_blank">View CV (PDF)</a> 
+                   
+                </td>
+                <td>
+                    
+                    <a asp-action="Details" asp-route-id="@item.CvId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CvId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

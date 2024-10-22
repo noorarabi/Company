@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Comment>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            <h6 class="section-title bg-white text-center text-primary px-3">All Comments</h6>
+            <h1 class="mb-5">Our Students Say!</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel position-relative">
+            @foreach(var item in Model){
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="data:image;base64,@Convert.ToBase64String(item.img)" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">@item.Name</h5>
+                    <p>@item.Creation.ToShortDateString()</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">@item.CommentText</p>
+                    </div>
+                </div>
+            }
+         
+        </div>
+    </div>
+</div>

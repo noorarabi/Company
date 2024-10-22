@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Train>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All</h1>
+
+ <p>
+    <a asp-action="Create">Create New</a>
+</p> 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingName)
+            </th>
+          @*   <th>
+                @Html.DisplayNameFor(model => model.TrainingField)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingDate)
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.TrainingTime)
+            </th> *@
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingImg)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingName)
+                </td>
+             @*    <td>
+                    @Html.DisplayFor(modelItem => item.TrainingField)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingDate)
+                </td>
+              @*   <td>
+                    @Html.DisplayFor(modelItem => item.TrainingTime)
+                </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="data:image;base64,@Convert.ToBase64String(item.TrainingImg)" style="width: 80px; height: 80px;">
+
+
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TrainId">Edit</a> | 
+                    <a asp-action="Details" asp-route-id="@item.TrainId">Details</a> |
+                    <a asp-action="Delete"  asp-route-id="@item.TrainId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

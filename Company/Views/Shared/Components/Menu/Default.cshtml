@@ -1,0 +1,58 @@
+﻿ @using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _signInManager
+@model IEnumerable<Menu>
+
+
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow fixed-top p-0">
+    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>Training Providers Directory</h2>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+
+       <div class="navbar-nav ms-auto p-4 p-lg-0">
+            @foreach (var mainitem in Model.Where(m => m.ParentId == 0))
+            {
+                var subItems = Model.Where(m => m.ParentId == mainitem.MenuId);
+                <div class="nav-item dropdown">
+                    <a class="nav-link @((subItems.Any()) ? "dropdown-toggle" : "")" href="@mainitem.MenuUrl" id="navbarDropdown" role="button"
+                    @if (subItems.Any())
+                    {
+                        <text>data-bs-toggle="dropdown" aria-expanded="false"</text>
+                    }>
+                        @mainitem.MenuTitle
+            </a>
+                    @if (subItems.Any())
+                    {
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach (var subItem in subItems)
+                            {
+                                <li><a class="dropdown-item" href="@subItem.MenuUrl">@subItem.MenuTitle</a></li>
+                            }
+                        </ul>
+                    }
+                </div>
+            }
+
+            
+            
+        </div>   
+
+        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Student"))
+        {
+            <form method="post" asp-action="Logout" asp-controller="Account">
+                <button class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Logout @User.Identity!.Name</button>
+            </form>
+        }
+        else
+        {
+            <a asp-action="Register" asp-controller="Account" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+                Join Now<i class="fa fa-arrow-right ms-3"></i>
+            </a>
+        }
+    </div>
+</nav>
+ 
