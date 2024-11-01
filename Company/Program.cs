@@ -1,5 +1,6 @@
 using Company.Controllers;
 using Company.Data;
+using Email;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,11 @@ namespace Company
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            //builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<EmailSender>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+           
             // Add DbContext
             builder.Services.AddDbContext<CompanyDbContext>(options => {
                 options.UseSqlServer(builder.Configuration

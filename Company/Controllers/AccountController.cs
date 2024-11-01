@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Net.Mail;
 using System.Net;
+using Email;
 
 namespace Company.Controllers
 {
@@ -15,13 +16,15 @@ namespace Company.Controllers
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
         private RoleManager<IdentityRole> _roleManager;
+        private readonly EmailSender _emailSender;
         public AccountController(UserManager<IdentityUser> userManager,
            SignInManager<IdentityUser> signInManager,
-           RoleManager<IdentityRole> roleManager)
+           RoleManager<IdentityRole> roleManager, EmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _emailSender = emailSender;
         }
        
         public IActionResult Register()
@@ -51,23 +54,21 @@ namespace Company.Controllers
                     if (model.IsSelected)
                     {
                        
-                        //var roleExists = await _roleManager.RoleExistsAsync("Admain");
-                        //if (!roleExists)
-                        //{
+                       
                            
                             IdentityRole role = new IdentityRole { Name = "Admain" };
                             await _roleManager.CreateAsync(role);
-                        //}
+                        
 
                         await _userManager.AddToRoleAsync(user, "Admain");
-                        //SendEmail(user.Email);
+                        await _emailSender.SendEmailAsync(user.Email,$"Hello{user.UserName}", "Welcom To Our WebSite (Training Providers Directory)");
                         return RedirectToAction("Login");
                     }
                     
                     IdentityRole role1 = new IdentityRole { Name = "Student" };
                     await _roleManager.CreateAsync(role1);
                     await _userManager.AddToRoleAsync(user,"Student");
-                    //SendEmail(user.Email);
+                    await _emailSender.SendEmailAsync(user.Email,$"Hello{user.UserName}","Welcom To Our WebSite (Training Providers Directory)");
                     return RedirectToAction("Login");
                 }
 
